@@ -8,6 +8,10 @@ import {
   Category,
   JargonEntry,
 } from "@/data/jargon";
+import RandomRejection from "@/components/RandomRejection";
+import BingoCard from "@/components/BingoCard";
+import RateRejections from "@/components/RateRejections";
+import Quiz from "@/components/Quiz";
 
 // ─── Fallback sarcastic translations for unmatched input ───
 
@@ -598,6 +602,50 @@ function DailyPhrase() {
   );
 }
 
+// ─── Section Nav with features ───
+
+function SectionNav() {
+  const [activeSection, setActiveSection] = useState<"random" | "bingo" | "rate" | "quiz" | null>(null);
+
+  const sections = [
+    { key: "random" as const, label: "Random Rejection", icon: "&#x1F3B0;", desc: "Slot machine of pain" },
+    { key: "bingo" as const, label: "Rejection Bingo", icon: "&#x1F4CB;", desc: "Check off what you've heard" },
+    { key: "rate" as const, label: "Rate Rejections", icon: "&#x1F525;", desc: "Vote on the most brutal" },
+    { key: "quiz" as const, label: "Guess the Meaning", icon: "&#x1F9E0;", desc: "10-question quiz" },
+  ];
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 sm:px-0 py-8">
+      {/* Feature cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+        {sections.map((s) => (
+          <button
+            key={s.key}
+            onClick={() => setActiveSection(activeSection === s.key ? null : s.key)}
+            className={`p-4 rounded-xl border text-center transition-all duration-300 ${
+              activeSection === s.key
+                ? "bg-gradient-to-br from-red-500/15 to-orange-500/15 border-orange-500/30 scale-[0.97]"
+                : "bg-white/[0.05] border-white/15 hover:bg-white/[0.08] hover:border-white/20"
+            }`}
+          >
+            <p className="text-2xl mb-1.5" dangerouslySetInnerHTML={{ __html: s.icon }} />
+            <p className={`text-sm font-semibold mb-0.5 ${activeSection === s.key ? "text-orange-300" : "text-white"}`}>
+              {s.label}
+            </p>
+            <p className="text-white/40 text-xs">{s.desc}</p>
+          </button>
+        ))}
+      </div>
+
+      {/* Active section content */}
+      {activeSection === "random" && <RandomRejection />}
+      {activeSection === "bingo" && <BingoCard />}
+      {activeSection === "rate" && <RateRejections />}
+      {activeSection === "quiz" && <Quiz />}
+    </div>
+  );
+}
+
 // ─── Stats counter ───
 
 function AnimatedCounter({ target }: { target: number }) {
@@ -672,6 +720,9 @@ export default function Home() {
 
         {/* Daily phrase */}
         <DailyPhrase />
+
+        {/* Section nav */}
+        <SectionNav />
 
         {/* Divider */}
         <div className="w-full flex items-center justify-center py-4">
