@@ -107,17 +107,17 @@ export default function Quiz() {
               <p className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
                 {score}/{questions.length}
               </p>
-              <p className="text-white/50 text-xs mt-1">Correct</p>
+              <p className="text-white/70 text-xs mt-1">Correct</p>
             </div>
             <div className="w-px h-12 bg-white/15" />
             <div className="text-center">
               <p className="text-3xl sm:text-4xl font-black text-white">{bestStreak}</p>
-              <p className="text-white/50 text-xs mt-1">Best streak</p>
+              <p className="text-white/70 text-xs mt-1">Best streak</p>
             </div>
             <div className="w-px h-12 bg-white/15" />
             <div className="text-center">
               <p className="text-3xl sm:text-4xl font-black text-white">{Math.round((score / questions.length) * 100)}%</p>
-              <p className="text-white/50 text-xs mt-1">Accuracy</p>
+              <p className="text-white/70 text-xs mt-1">Accuracy</p>
             </div>
           </div>
 
@@ -153,8 +153,8 @@ export default function Quiz() {
         </div>
 
         {/* Question header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/10 bg-white/[0.02]">
-          <span className="text-white/50 text-sm">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-white/20 bg-white/[0.06]">
+          <span className="text-white/70 text-sm">
             Question {currentQ + 1} of {questions.length}
           </span>
           <div className="flex items-center gap-4">
@@ -172,7 +172,7 @@ export default function Quiz() {
         {/* The phrase */}
         <div className="p-5 sm:p-8">
           <div className="text-center mb-8">
-            <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">A VC says...</p>
+            <p className="text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">A VC says...</p>
             <p className="text-white text-xl sm:text-2xl font-medium leading-relaxed">
               &quot;{question.phrase.phrase}&quot;
             </p>
@@ -185,7 +185,7 @@ export default function Quiz() {
 
           {/* Options */}
           <div className="space-y-3">
-            <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-3">What do they actually mean?</p>
+            <p className="text-orange-400 text-xs font-semibold uppercase tracking-wider mb-3">What do they actually mean?</p>
             {question.options.map((option, oi) => {
               const isCorrect = oi === question.correctIndex;
               const isSelected = oi === selected;
@@ -198,7 +198,7 @@ export default function Quiz() {
                 } else if (isSelected && !isCorrect) {
                   style = "bg-red-500/15 border-red-500/40 text-red-300";
                 } else {
-                  style = "bg-white/[0.02] border-white/10 text-white/40";
+                  style = "bg-white/[0.06] border-white/20 text-white/60";
                 }
               }
 
@@ -215,7 +215,7 @@ export default function Quiz() {
                         ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400"
                         : answered && isSelected && !isCorrect
                           ? "bg-red-500/20 border-red-500/40 text-red-400"
-                          : "bg-white/[0.05] border-white/20 text-white/50"
+                          : "bg-white/[0.05] border-white/20 text-white/70"
                     }`}>
                       {answered && isCorrect ? "✓" : answered && isSelected && !isCorrect ? "✗" : String.fromCharCode(65 + oi)}
                     </span>

@@ -162,7 +162,7 @@ export default function RateRejections() {
               <div className="flex items-start gap-3 sm:gap-4">
                 {/* Rank */}
                 <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold ${
-                  i < 3 ? "bg-gradient-to-br from-red-500/30 to-orange-500/30 text-orange-300" : "bg-white/[0.05] text-white/40"
+                  i < 3 ? "bg-gradient-to-br from-red-500/30 to-orange-500/30 text-orange-300" : "bg-white/[0.05] text-white/70"
                 }`}>
                   {i + 1}
                 </div>
@@ -180,8 +180,8 @@ export default function RateRejections() {
                     <span className={`px-2.5 py-0.5 text-xs font-medium rounded-full border ${categoryColors[entry.category]}`}>
                       {categoryLabels[entry.category]}
                     </span>
-                    <span className="text-white/40 text-xs">{accuracy}% say accurate</span>
-                    <span className="text-white/40 text-xs">{v.up + v.down} votes</span>
+                    <span className="text-white/70 text-xs">{accuracy}% say accurate</span>
+                    <span className="text-white/70 text-xs">{v.up + v.down} votes</span>
                   </div>
                 </div>
 
@@ -192,7 +192,7 @@ export default function RateRejections() {
                     className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
                       userVote === "up"
                         ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                        : "bg-white/[0.03] text-white/40 border border-white/10 hover:bg-white/10 hover:text-white"
+                        : "bg-white/[0.03] text-white/70 border border-white/20 hover:bg-white/10 hover:text-white"
                     }`}
                     title="Accurate"
                   >
@@ -200,7 +200,7 @@ export default function RateRejections() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
                     </svg>
                   </button>
-                  <span className={`text-sm font-bold ${score > 0 ? "text-emerald-400" : score < 0 ? "text-red-400" : "text-white/40"}`}>
+                  <span className={`text-sm font-bold ${score > 0 ? "text-emerald-400" : score < 0 ? "text-red-400" : "text-white/70"}`}>
                     {score}
                   </span>
                   <button
@@ -208,7 +208,7 @@ export default function RateRejections() {
                     className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
                       userVote === "down"
                         ? "bg-red-500/20 text-red-400 border border-red-500/30"
-                        : "bg-white/[0.03] text-white/40 border border-white/10 hover:bg-white/10 hover:text-white"
+                        : "bg-white/[0.03] text-white/70 border border-white/20 hover:bg-white/10 hover:text-white"
                     }`}
                     title="Not accurate"
                   >

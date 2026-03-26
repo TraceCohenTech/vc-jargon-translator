@@ -206,7 +206,7 @@ function TypingExample() {
   }, [displayed, isDeleting, currentIndex]);
 
   return (
-    <span className="text-white/30">
+    <span className="text-white/60">
       {displayed}
       <span className="inline-block w-0.5 h-5 bg-white/40 ml-0.5 animate-pulse align-middle" />
     </span>
@@ -286,7 +286,7 @@ function TranslatorSection() {
 
       {/* Scanning animation */}
       {isTranslating && (
-        <div className="mt-6 relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-6 sm:p-8 scan-line">
+        <div className="mt-6 relative overflow-hidden rounded-xl border border-white/15 bg-white/[0.06] p-6 sm:p-8 scan-line">
           <div className="flex items-center justify-center gap-3">
             <div className="flex gap-1">
               {[0, 1, 2, 3, 4].map((i) => (
@@ -340,7 +340,7 @@ function TranslatorSection() {
                       </div>
                     </div>
 
-                    <div className="p-5 sm:p-6 bg-white/[0.03] border-t md:border-t-0 md:border-l border-white/10 animate-slide-right" style={{ animationDelay: `${i * 0.1 + 0.3}s`, opacity: 0 }}>
+                    <div className="p-5 sm:p-6 bg-white/[0.06] border-t md:border-t-0 md:border-l border-white/20 animate-slide-right" style={{ animationDelay: `${i * 0.1 + 0.3}s`, opacity: 0 }}>
                       <p className="text-orange-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-orange-400 rounded-full" />
                         What they meant
@@ -352,7 +352,7 @@ function TranslatorSection() {
                   </div>
 
                   {/* Bottom bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 py-3 border-t border-white/10 bg-white/[0.03]">
+                  <div className="flex flex-wrap items-center justify-between gap-2 px-4 sm:px-6 py-3 border-t border-white/20 bg-white/[0.06]">
                     <div className="flex items-center gap-3">
                       <span className={`px-3 py-1 text-xs font-medium rounded-full border ${categoryColors[entry.category]}`}>
                         {categoryLabels[entry.category]}
@@ -361,12 +361,12 @@ function TranslatorSection() {
                         {Array.from({ length: 5 }).map((_, si) => (
                           <div key={si} className={`w-2 h-2 rounded-full ${si < entry.severity ? "bg-red-500" : "bg-white/15"}`} />
                         ))}
-                        <span className="text-white/50 text-xs ml-1.5">Brutality</span>
+                        <span className="text-red-400 text-xs ml-1.5">Brutality</span>
                       </div>
                     </div>
                     <button
                       onClick={() => handleShare(entry.phrase, entry.translation)}
-                      className="text-white/50 hover:text-white text-sm transition-all flex items-center gap-1.5"
+                      className="text-white/70 hover:text-white text-sm transition-all flex items-center gap-1.5"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -394,7 +394,7 @@ function TranslatorSection() {
                         <span className="px-3 py-1 text-xs font-medium rounded-full border border-red-500/30 bg-red-500/20 text-red-400">
                           {result.fallbackCategory}
                         </span>
-                        <span className="text-white/50 text-xs">BS Detector triggered</span>
+                        <span className="text-red-400 text-xs">BS Detector triggered</span>
                       </div>
                     </div>
 
@@ -405,7 +405,7 @@ function TranslatorSection() {
                       </p>
                     </div>
 
-                    <div className="bg-white/[0.05] rounded-xl p-4 sm:p-5 border border-white/10">
+                    <div className="bg-white/[0.05] rounded-xl p-4 sm:p-5 border border-white/20">
                       <p className="text-orange-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 bg-orange-400 rounded-full" />
                         Decoded
@@ -416,11 +416,11 @@ function TranslatorSection() {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-2 px-5 sm:px-8 py-3 border-t border-white/10 bg-white/[0.03]">
-                    <p className="text-white/40 text-xs">Not in our database — but we know the type</p>
+                  <div className="flex flex-wrap items-center justify-between gap-2 px-5 sm:px-8 py-3 border-t border-white/20 bg-white/[0.06]">
+                    <p className="text-white/70 text-xs">Not in our database — but we know the type</p>
                     <button
                       onClick={() => handleShare(result.originalText, result.fallbackTranslation || "")}
-                      className="text-white/50 hover:text-white text-sm transition-all flex items-center gap-1.5"
+                      className="text-white/70 hover:text-white text-sm transition-all flex items-center gap-1.5"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -436,7 +436,7 @@ function TranslatorSection() {
           <div className="text-center pt-4 animate-fade-in" style={{ animationDelay: "0.5s", opacity: 0 }}>
             <button
               onClick={() => { setInput(""); setHasTranslated(false); setResults([]); }}
-              className="text-white/50 hover:text-white text-sm transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50"
+              className="text-white/70 hover:text-white text-sm transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white/50"
             >
               Translate another
             </button>
@@ -480,7 +480,7 @@ function DictionarySection() {
       <div className="relative mb-6 group">
         <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-xl blur opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
         <div className="relative">
-          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -488,7 +488,7 @@ function DictionarySection() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search phrases..."
-            className="w-full bg-white/[0.05] border border-white/15 rounded-xl pl-12 pr-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-white/25 transition-all duration-300"
+            className="w-full bg-white/[0.05] border border-white/15 rounded-xl pl-12 pr-5 py-3.5 text-white placeholder-white/50 focus:outline-none focus:border-white/25 transition-all duration-300"
           />
         </div>
       </div>
@@ -541,7 +541,7 @@ function DictionarySection() {
                     </span>
                     <button
                       onClick={() => handleShare(entry)}
-                      className="sm:opacity-0 sm:group-hover:opacity-100 text-white/40 hover:text-white transition-all p-1.5 hover:bg-white/10 rounded-lg"
+                      className="sm:opacity-0 sm:group-hover:opacity-100 text-white/70 hover:text-white transition-all p-1.5 hover:bg-white/10 rounded-lg"
                       title="Share on Twitter"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -586,7 +586,7 @@ function DailyPhrase() {
         <p className="text-orange-300 text-base sm:text-lg leading-relaxed">
           {entry.translation}
         </p>
-        <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+        <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/20">
           <span className={`px-3 py-1 text-xs font-medium rounded-full border ${categoryColors[entry.category]}`}>
             {categoryLabels[entry.category]}
           </span>
@@ -594,7 +594,7 @@ function DailyPhrase() {
             {Array.from({ length: 5 }).map((_, si) => (
               <div key={si} className={`w-2 h-2 rounded-full ${si < entry.severity ? "bg-red-500" : "bg-white/15"}`} />
             ))}
-            <span className="text-white/50 text-xs ml-1.5">Brutality</span>
+            <span className="text-red-400 text-xs ml-1.5">Brutality</span>
           </div>
         </div>
       </div>
@@ -632,7 +632,7 @@ function SectionNav() {
             <p className={`text-sm font-semibold mb-0.5 ${activeSection === s.key ? "text-orange-300" : "text-white"}`}>
               {s.label}
             </p>
-            <p className="text-white/40 text-xs">{s.desc}</p>
+            <p className="text-white/70 text-xs">{s.desc}</p>
           </button>
         ))}
       </div>
@@ -708,7 +708,7 @@ export default function Home() {
               <p className="text-xl sm:text-2xl font-bold text-white">
                 <AnimatedCounter target={stat.value} />
               </p>
-              <p className="text-white/50 text-xs mt-1">{stat.label}</p>
+              <p className="text-white/70 text-xs mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -737,14 +737,14 @@ export default function Home() {
         {/* Footer */}
         <footer className="border-t border-white/15 py-8 px-4">
           <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/50 text-sm">
+            <p className="text-white/70 text-sm">
               Built for founders tired of decoding VC emails.
             </p>
             <div className="flex items-center gap-6">
-              <a href="https://x.com/Trace_Cohen" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">
+              <a href="https://x.com/Trace_Cohen" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors text-sm">
                 Twitter
               </a>
-              <a href="mailto:t@nyvp.com" className="text-white/50 hover:text-white transition-colors text-sm">
+              <a href="mailto:t@nyvp.com" className="text-white/70 hover:text-white transition-colors text-sm">
                 t@nyvp.com
               </a>
             </div>
