@@ -18,35 +18,70 @@ const loadingMessages = [
   "Detecting passive aggression...",
 ];
 
+const STOP_WORDS = new Set([
+  "i", "me", "my", "we", "our", "you", "your", "it", "its", "he", "she",
+  "they", "them", "this", "that", "what", "which", "who", "whom",
+  "a", "an", "the", "and", "but", "or", "so", "if", "then",
+  "is", "am", "are", "was", "were", "be", "been", "being",
+  "have", "has", "had", "do", "does", "did", "will", "would", "could",
+  "should", "can", "may", "might", "shall", "must",
+  "to", "of", "in", "for", "on", "with", "at", "by", "from", "up",
+  "about", "into", "through", "during", "before", "after",
+  "not", "no", "nor", "just", "also", "very", "too", "quite",
+  "let", "get", "got", "go", "going", "come", "here", "there",
+  "how", "when", "where", "why", "all", "each", "every", "some",
+  "any", "few", "more", "most", "other", "than", "out", "over",
+  "hey", "hi", "hello", "thanks", "thank", "please",
+]);
+
+function getSignificantWords(text: string): string[] {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z\s'-]/g, "")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !STOP_WORDS.has(w));
+}
+
 function matchJargon(input: string): JargonEntry[] {
   const lower = input.toLowerCase().trim();
   if (!lower) return [];
 
+  const inputSignificant = getSignificantWords(input);
+
   const scored = jargonData
     .map((entry) => {
       const phraseLower = entry.phrase.toLowerCase();
-      // Exact match
+
+      // Exact phrase match — highest priority
       if (lower.includes(phraseLower)) {
-        return { entry, score: 100 + entry.phrase.length };
+        return { entry, score: 200 + entry.phrase.length };
       }
-      // Word overlap scoring
-      const inputWords = lower.split(/\s+/);
-      const phraseWords = phraseLower.split(/\s+/);
-      const matchedWords = phraseWords.filter((w) =>
-        inputWords.some(
-          (iw) => iw === w || iw.includes(w) || w.includes(iw)
+
+      // Significant word overlap (ignoring stop words)
+      const phraseSignificant = getSignificantWords(entry.phrase);
+      if (phraseSignificant.length === 0) return { entry, score: 0 };
+
+      const matchedWords = phraseSignificant.filter((pw) =>
+        inputSignificant.some(
+          (iw) => iw === pw || (pw.length > 4 && iw.startsWith(pw.slice(0, -1)))
         )
       );
-      const overlapRatio = matchedWords.length / phraseWords.length;
-      if (overlapRatio >= 0.5) {
-        return { entry, score: overlapRatio * 50 };
+
+      const overlapRatio = matchedWords.length / phraseSignificant.length;
+
+      // Require at least 60% of significant words to match
+      // AND at least 2 significant words matched (prevents single-word false positives)
+      if (overlapRatio >= 0.6 && matchedWords.length >= 2) {
+        return { entry, score: overlapRatio * 50 + matchedWords.length * 5 };
       }
+
       return { entry, score: 0 };
     })
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  return scored.map((s) => s.entry);
+  // Cap results to top 5 to avoid noise
+  return scored.slice(0, 5).map((s) => s.entry);
 }
 
 function TranslatorSection() {

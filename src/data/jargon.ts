@@ -18,6 +18,13 @@ export interface JargonEntry {
 export const jargonData: JargonEntry[] = [
   // REJECTIONS
   {
+    phrase: "Love what you're working on, let me run through it and get back to you",
+    translation: "I skimmed your deck for 30 seconds and will never think about this again",
+    category: "stalling",
+    severity: 4,
+    tags: ["email", "meeting-followup"],
+  },
+  {
     phrase: "We'd love to stay in touch",
     translation: "We're passing but don't want to burn the bridge in case you blow up",
     category: "rejection",
